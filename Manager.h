@@ -5,14 +5,12 @@
 #include <QString>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QTimer>
 #include <QWidget>
 #include "GenWartZadana.h"
 #include "SprzezenieZwrotne.h"
 #include <cassert>
 #include <vector>
-#include <QTimer>
-
-
 
 class Manager : public QObject
 {
@@ -21,21 +19,17 @@ class Manager : public QObject
 public:
     Manager()
         : QObject()
-        , server(nullptr)       // Musi być najpierw
+        , server(nullptr) // Musi być najpierw
         , serverSocket(nullptr)
         , clientSocket(nullptr)
-        , gen_wart()            // Następnie inicjalizacja gen_wart
+        , gen_wart() // Następnie inicjalizacja gen_wart
         , sprzezeniezwrotne()
         , dataReceived(false)
     {
         timer = new QTimer(this);
         connect(timer, &QTimer::timeout, this, &Manager::wykonajTakt);
-
-
     }
     ~Manager() {}
-
-
 
     void startTaktowanie()
     {
@@ -48,9 +42,6 @@ public:
         timer->stop();
         emit statusChanged("Taktowanie jednostronne zatrzymane.");
     }
-
-
-
 
     void stopServer()
     {
@@ -80,10 +71,6 @@ public:
             clientSocket->write(message.toUtf8());
         }
     }
-
-
-
-
 
     // Uruchom serwer w trybie Regulatora
     void startServer(int port)
@@ -134,8 +121,6 @@ public:
         qDebug() << "Tryb pracy: " << (isNetworkMode ? "Regulator" : "Obiekt regulacji");
     }
 
-
-
 signals:
     void statusChanged(const QString &status); // Informacja o stanie połączenia
     void modeChanged(bool isRegulator);        // Zmiana trybu pracy
@@ -144,34 +129,30 @@ signals:
 public slots:
     void wykonajTakt()
     {
-       // dataReceived = true;
-        qInfo() << __FUNCTION__ ;
+        // dataReceived = true;
+        qInfo() << __FUNCTION__;
         // Wyślij sygnał sterujący do obiektu
         //double wartZadana = gen_wart.GenerujSygnal(timer->interval());
-       // sendMessage(QString::number(wartZadana));
+        // sendMessage(QString::number(wartZadana));
         sendMessage("Testowa wiadomość z klienta");
 
         // Sprawdź, czy odpowiedź dotarła
         if (dataReceived) {
             // Procesuj otrzymane dane
-          processResponseData();
+            processResponseData();
             emit statusChanged("Symulacja wyrabia");
             qDebug() << "Emit: Symulacja wyrabia";
 
         } else {
             // Użyj poprzednich danych
-           usePreviousData();
+            usePreviousData();
             emit statusChanged("Symulacja nie wyrabia");
             qDebug() << "Emit: Symulacja nie wyrabia";
-
         }
 
         // Reset flagi na kolejny takt
         dataReceived = false;
-
     }
-
-
 
     void setGenerator(Sygnal typ, std::vector<double> &ParametryGen)
     {
@@ -272,16 +253,14 @@ private slots:
         QByteArray data;
         if (clientSocket) {
             data = clientSocket->readAll();
-             qDebug() << "Klient odebrał dane: " << QString(data);
+            qDebug() << "Klient odebrał dane: " << QString(data);
             // Przetwarzanie danych
-             double wynik = 5;
-             dataReceived = true;
+            double wynik = 5;
+            dataReceived = true;
 
             // Wysłanie odpowiedzi zwrotnej do serwera
-             clientSocket->write(QString::number(wynik).toUtf8());
+            clientSocket->write(QString::number(wynik).toUtf8());
             qDebug() << "Klient wysłał odpowiedź: " << wynik;
-
-
 
         } else if (serverSocket) {
             data = serverSocket->readAll();
@@ -292,7 +271,6 @@ private slots:
             // Wysłanie odpowiedzi zwrotnej do klienta
             serverSocket->write("Odpowiedź od serwera: Dane przetworzone");
             qDebug() << "Serwer wysłał odpowiedź zwrotną do klienta.";
-
         }
         // qInfo() << "Received data: " << data;
         // dataReceived = true; // Dane dotarły
@@ -305,9 +283,8 @@ private:
     QTcpSocket *clientSocket;
     SprzezenieZwrotne sprzezeniezwrotne;
     GenWartZadana gen_wart;
-    QTimer *timer; // Timer do taktowania
+    QTimer *timer;     // Timer do taktowania
     bool dataReceived; // Flaga czy dane dotarły od obiektu
-
 
     void processResponseData()
     {
@@ -320,7 +297,6 @@ private:
         qInfo() << "Brak danych - użycie poprzedniej wartości.";
         // Tu dodaj logikę korzystania z poprzedniej wartości
     }
-
 
     void zapiszWiersz(QTextStream &out, const std::vector<double> &vec)
     {

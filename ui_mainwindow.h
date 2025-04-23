@@ -120,21 +120,21 @@ public:
         wzmocnienie = new QLabel(groupBox);
         wzmocnienie->setObjectName("wzmocnienie");
         wzmocnienie->setStyleSheet(QString::fromUtf8("font: 15pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);"));
+                                                     "color: rgb(0, 0, 0);"));
 
         gridLayout_3->addWidget(wzmocnienie, 0, 0, 1, 1);
 
         rozniczkowanie = new QLabel(groupBox);
         rozniczkowanie->setObjectName("rozniczkowanie");
         rozniczkowanie->setStyleSheet(QString::fromUtf8("font: 15pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);"));
+                                                        "color: rgb(0, 0, 0);"));
 
         gridLayout_3->addWidget(rozniczkowanie, 2, 0, 1, 1);
 
         calkowanie = new QLabel(groupBox);
         calkowanie->setObjectName("calkowanie");
         calkowanie->setStyleSheet(QString::fromUtf8("font: 15pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);"));
+                                                    "color: rgb(0, 0, 0);"));
 
         gridLayout_3->addWidget(calkowanie, 1, 0, 1, 1);
 
@@ -162,7 +162,6 @@ public:
 
         gridLayout_3->addWidget(st_rozn, 2, 1, 1, 1);
 
-
         verticalLayout_3->addLayout(gridLayout_3);
 
         Reset_pid = new QPushButton(groupBox);
@@ -185,9 +184,7 @@ public:
 
         horizontalLayout->addWidget(Tryb_przed);
 
-
         verticalLayout_3->addWidget(groupBox_7);
-
 
         verticalLayout_2->addWidget(groupBox);
 
@@ -205,10 +202,9 @@ public:
         sizePolicy3.setHeightForWidth(Conf_Button->sizePolicy().hasHeightForWidth());
         Conf_Button->setSizePolicy(sizePolicy3);
         Conf_Button->setStyleSheet(QString::fromUtf8("font: 11pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);"));
+                                                     "color: rgb(0, 0, 0);"));
 
         gridLayout_2->addWidget(Conf_Button, 0, 0, 1, 1);
-
 
         verticalLayout_2->addWidget(groupBox_4);
 
@@ -228,7 +224,7 @@ public:
         label = new QLabel(groupBox_2);
         label->setObjectName("label");
         label->setStyleSheet(QString::fromUtf8("font: 15pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);"));
+                                               "color: rgb(0, 0, 0);"));
 
         gridLayout_4->addWidget(label, 0, 0, 1, 1);
 
@@ -243,7 +239,7 @@ public:
         label_2 = new QLabel(groupBox_2);
         label_2->setObjectName("label_2");
         label_2->setStyleSheet(QString::fromUtf8("font: 15pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);"));
+                                                 "color: rgb(0, 0, 0);"));
 
         gridLayout_4->addWidget(label_2, 1, 0, 1, 1);
 
@@ -260,21 +256,21 @@ public:
         label_4 = new QLabel(groupBox_2);
         label_4->setObjectName("label_4");
         label_4->setStyleSheet(QString::fromUtf8("font: 15pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);"));
+                                                 "color: rgb(0, 0, 0);"));
 
         gridLayout_4->addWidget(label_4, 3, 0, 1, 1);
 
         label_3 = new QLabel(groupBox_2);
         label_3->setObjectName("label_3");
         label_3->setStyleSheet(QString::fromUtf8("font: 15pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);"));
+                                                 "color: rgb(0, 0, 0);"));
 
         gridLayout_4->addWidget(label_3, 2, 0, 1, 1);
 
         label_5 = new QLabel(groupBox_2);
         label_5->setObjectName("label_5");
         label_5->setStyleSheet(QString::fromUtf8("font: 12pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);"));
+                                                 "color: rgb(0, 0, 0);"));
 
         gridLayout_4->addWidget(label_5, 4, 0, 1, 1);
 
@@ -282,7 +278,6 @@ public:
         war_stala->setObjectName("war_stala");
 
         gridLayout_4->addWidget(war_stala, 4, 1, 1, 1);
-
 
         verticalLayout_4->addLayout(gridLayout_4);
 
@@ -294,8 +289,8 @@ public:
         sin->setObjectName("sin");
         sin->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
         sin->setStyleSheet(QString::fromUtf8("font: 12pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);\n"
-""));
+                                             "color: rgb(0, 0, 0);\n"
+                                             ""));
 
         verticalLayout_6->addWidget(sin);
 
@@ -303,8 +298,8 @@ public:
         prost->setObjectName("prost");
         prost->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
         prost->setStyleSheet(QString::fromUtf8("font: 11pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);\n"
-""));
+                                               "color: rgb(0, 0, 0);\n"
+                                               ""));
 
         verticalLayout_6->addWidget(prost);
 
@@ -312,14 +307,12 @@ public:
         skok->setObjectName("skok");
         skok->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
         skok->setStyleSheet(QString::fromUtf8("font: 11pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);\n"
-""));
+                                              "color: rgb(0, 0, 0);\n"
+                                              ""));
 
         verticalLayout_6->addWidget(skok);
 
-
         verticalLayout_4->addWidget(groupBox_3);
-
 
         verticalLayout_2->addWidget(groupBox_2);
 
@@ -336,8 +329,8 @@ public:
         sizePolicy2.setHeightForWidth(label_7->sizePolicy().hasHeightForWidth());
         label_7->setSizePolicy(sizePolicy2);
         label_7->setStyleSheet(QString::fromUtf8("font: 11pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);\n"
-""));
+                                                 "color: rgb(0, 0, 0);\n"
+                                                 ""));
 
         horizontalLayout_2->addWidget(label_7);
 
@@ -347,7 +340,6 @@ public:
         interval->setSizePolicy(sizePolicy2);
 
         horizontalLayout_2->addWidget(interval);
-
 
         verticalLayout_7->addLayout(horizontalLayout_2);
 
@@ -359,8 +351,8 @@ public:
         Start_Button->setSizePolicy(sizePolicy2);
         Start_Button->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
         Start_Button->setStyleSheet(QString::fromUtf8("font: 11pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);\n"
-""));
+                                                      "color: rgb(0, 0, 0);\n"
+                                                      ""));
 
         Buttons_layout->addWidget(Start_Button);
 
@@ -371,8 +363,8 @@ public:
         Reset_Button->setSizePolicy(sizePolicy2);
         Reset_Button->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
         Reset_Button->setStyleSheet(QString::fromUtf8("font: 11pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);\n"
-""));
+                                                      "color: rgb(0, 0, 0);\n"
+                                                      ""));
 
         Buttons_layout->addWidget(Reset_Button);
 
@@ -383,14 +375,12 @@ public:
         Stop_Button->setSizePolicy(sizePolicy2);
         Stop_Button->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
         Stop_Button->setStyleSheet(QString::fromUtf8("font: 11pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);\n"
-""));
+                                                     "color: rgb(0, 0, 0);\n"
+                                                     ""));
 
         Buttons_layout->addWidget(Stop_Button);
 
-
         verticalLayout_7->addLayout(Buttons_layout);
-
 
         verticalLayout_2->addWidget(groupBox_5);
 
@@ -403,19 +393,18 @@ public:
         saveButton = new QPushButton(groupBox_6);
         saveButton->setObjectName("saveButton");
         saveButton->setStyleSheet(QString::fromUtf8("font: 11pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);\n"
-""));
+                                                    "color: rgb(0, 0, 0);\n"
+                                                    ""));
 
         verticalLayout_5->addWidget(saveButton);
 
         readButton = new QPushButton(groupBox_6);
         readButton->setObjectName("readButton");
         readButton->setStyleSheet(QString::fromUtf8("font: 11pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);\n"
-""));
+                                                    "color: rgb(0, 0, 0);\n"
+                                                    ""));
 
         verticalLayout_5->addWidget(readButton);
-
 
         verticalLayout_2->addWidget(groupBox_6);
 
@@ -426,14 +415,12 @@ public:
         pushButtonKonfiguracjaSieci = new QPushButton(groupBox_8);
         pushButtonKonfiguracjaSieci->setObjectName("pushButtonKonfiguracjaSieci");
         pushButtonKonfiguracjaSieci->setStyleSheet(QString::fromUtf8("font: 11pt \"Calibri\";\n"
-"color: rgb(0, 0, 0);\n"
-""));
+                                                                     "color: rgb(0, 0, 0);\n"
+                                                                     ""));
 
         verticalLayout->addWidget(pushButtonKonfiguracjaSieci);
 
-
         verticalLayout_2->addWidget(groupBox_8);
-
 
         gridLayout->addLayout(verticalLayout_2, 0, 0, 2, 1);
 
@@ -486,23 +473,63 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        groupBox->setTitle(QCoreApplication::translate("MainWindow", "USTAWIENIA REGULATORA PID", nullptr));
-        wzmocnienie->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Wzmocnienie:</span></p></body></html>", nullptr));
-        rozniczkowanie->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Sta\305\202a r\303\263\305\274niczkowania:</span></p></body></html>", nullptr));
-        calkowanie->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Sta\305\202a ca\305\202kowania:</span></p></body></html>", nullptr));
-        Reset_pid->setText(QCoreApplication::translate("MainWindow", "RESET PAMI\304\230CI", nullptr));
-        groupBox_7->setTitle(QCoreApplication::translate("MainWindow", "Sposobu liczenia skumulowanego uchybu", nullptr));
-        Tryb_pod->setText(QCoreApplication::translate("MainWindow", "POD CA\305\201K\304\204", nullptr));
-        Tryb_przed->setText(QCoreApplication::translate("MainWindow", "PRZED CA\305\201K\304\204", nullptr));
-        groupBox_4->setTitle(QCoreApplication::translate("MainWindow", "USTAWIENIA MODELU ARX", nullptr));
-        Conf_Button->setText(QCoreApplication::translate("MainWindow", "ZMIE\305\203 KONFIGURACJE", nullptr));
-        groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "USTAWIENIA GENERATORA", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Chwila aktywacji:</span></p></body></html>", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Amplituda:</span></p></body></html>", nullptr));
-        label_4->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Wype\305\202nienie:</span></p></body></html>", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Okres:</span></p></body></html>", nullptr));
-        label_5->setText(QCoreApplication::translate("MainWindow", "Warto\305\233\304\207 sta\305\202a", nullptr));
-        groupBox_3->setTitle(QCoreApplication::translate("MainWindow", "KSZTA\305\201T GENERATORA", nullptr));
+        groupBox->setTitle(
+            QCoreApplication::translate("MainWindow", "USTAWIENIA REGULATORA PID", nullptr));
+        wzmocnienie->setText(
+            QCoreApplication::translate("MainWindow",
+                                        "<html><head/><body><p><span style=\" "
+                                        "font-size:12pt;\">Wzmocnienie:</span></p></body></html>",
+                                        nullptr));
+        rozniczkowanie->setText(QCoreApplication::translate(
+            "MainWindow",
+            "<html><head/><body><p><span style=\" font-size:12pt;\">Sta\305\202a "
+            "r\303\263\305\274niczkowania:</span></p></body></html>",
+            nullptr));
+        calkowanie->setText(QCoreApplication::translate(
+            "MainWindow",
+            "<html><head/><body><p><span style=\" font-size:12pt;\">Sta\305\202a "
+            "ca\305\202kowania:</span></p></body></html>",
+            nullptr));
+        Reset_pid->setText(
+            QCoreApplication::translate("MainWindow", "RESET PAMI\304\230CI", nullptr));
+        groupBox_7->setTitle(QCoreApplication::translate("MainWindow",
+                                                         "Sposobu liczenia skumulowanego uchybu",
+                                                         nullptr));
+        Tryb_pod->setText(
+            QCoreApplication::translate("MainWindow", "POD CA\305\201K\304\204", nullptr));
+        Tryb_przed->setText(
+            QCoreApplication::translate("MainWindow", "PRZED CA\305\201K\304\204", nullptr));
+        groupBox_4->setTitle(
+            QCoreApplication::translate("MainWindow", "USTAWIENIA MODELU ARX", nullptr));
+        Conf_Button->setText(
+            QCoreApplication::translate("MainWindow", "ZMIE\305\203 KONFIGURACJE", nullptr));
+        groupBox_2->setTitle(
+            QCoreApplication::translate("MainWindow", "USTAWIENIA GENERATORA", nullptr));
+        label->setText(QCoreApplication::translate(
+            "MainWindow",
+            "<html><head/><body><p><span style=\" font-size:12pt;\">Chwila "
+            "aktywacji:</span></p></body></html>",
+            nullptr));
+        label_2->setText(
+            QCoreApplication::translate("MainWindow",
+                                        "<html><head/><body><p><span style=\" "
+                                        "font-size:12pt;\">Amplituda:</span></p></body></html>",
+                                        nullptr));
+        label_4->setText(QCoreApplication::translate(
+            "MainWindow",
+            "<html><head/><body><p><span style=\" "
+            "font-size:12pt;\">Wype\305\202nienie:</span></p></body></html>",
+            nullptr));
+        label_3->setText(
+            QCoreApplication::translate("MainWindow",
+                                        "<html><head/><body><p><span style=\" "
+                                        "font-size:12pt;\">Okres:</span></p></body></html>",
+                                        nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow",
+                                                     "Warto\305\233\304\207 sta\305\202a",
+                                                     nullptr));
+        groupBox_3->setTitle(
+            QCoreApplication::translate("MainWindow", "KSZTA\305\201T GENERATORA", nullptr));
         sin->setText(QCoreApplication::translate("MainWindow", "Sinusoida", nullptr));
         prost->setText(QCoreApplication::translate("MainWindow", "Prostok\304\205t", nullptr));
         skok->setText(QCoreApplication::translate("MainWindow", "Skok jednostkowy", nullptr));
@@ -515,16 +542,20 @@ public:
         saveButton->setText(QCoreApplication::translate("MainWindow", "Zapisz do pliku", nullptr));
         readButton->setText(QCoreApplication::translate("MainWindow", "Odczytaj z pliku", nullptr));
         groupBox_8->setTitle(QCoreApplication::translate("MainWindow", "Sie\304\207", nullptr));
-        pushButtonKonfiguracjaSieci->setText(QCoreApplication::translate("MainWindow", "Konfiguracja Sieci", nullptr));
+        pushButtonKonfiguracjaSieci->setText(
+            QCoreApplication::translate("MainWindow", "Konfiguracja Sieci", nullptr));
 #if QT_CONFIG(whatsthis)
-        widget1->setWhatsThis(QCoreApplication::translate("MainWindow", "<html><head/><body><p><br/></p></body></html>", nullptr));
+        widget1->setWhatsThis(
+            QCoreApplication::translate("MainWindow",
+                                        "<html><head/><body><p><br/></p></body></html>",
+                                        nullptr));
 #endif // QT_CONFIG(whatsthis)
     } // retranslateUi
-
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
+class MainWindow : public Ui_MainWindow
+{};
 } // namespace Ui
 
 QT_END_NAMESPACE

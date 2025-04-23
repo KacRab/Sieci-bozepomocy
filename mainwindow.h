@@ -22,6 +22,10 @@ public:
     explicit MainWindow(Manager *manager, QWidget *parent = nullptr);
     ~MainWindow();
 
+    void configureRegulatorMode();
+    void configureObjectMode();
+    void configureLocalMode();
+
 
 private slots:
     // Przyciski:
@@ -61,8 +65,7 @@ private slots:
     void on_war_stala_editingFinished();
 
     void on_pushButtonKonfiguracjaSieci_clicked();
-    void onModeChanged(bool isNetworkMode);
-
+    //void onModeChanged(bool isNetworkMode);
 
 private:
     NetworkSettings *networkSettings;

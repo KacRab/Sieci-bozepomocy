@@ -5,8 +5,6 @@
 
 #include <QWidget>
 #include "Manager.h"
-//#include "mainwindow.h"
-
 
 namespace Ui {
 class NetworkSettings;
@@ -26,17 +24,29 @@ public:
 public slots:
     void onModeChanged(bool isRegulator);
 
+
 private slots:
     void on_stopServerButton_clicked();
 
     void on_disconnectButton_clicked();
 
+    void on_startServerButton_clicked();
+
+    void on_connectButton_clicked();
+
+signals:
+    void regulatorModeActivated(); // Wywoływany po kliknięciu Start Server
+    void networkModeDisabled(); // Wywoływany po kliknięciu Stop
+    void objectModeActivated();
+
+
+
 private:
     Ui::NetworkSettings *ui;
     Manager *manager;
-  //  QLabel *statusLampka;
     MainWindow *mainWindow;
-
 };
+
+
 
 #endif // NETWORKSETTINGS_H

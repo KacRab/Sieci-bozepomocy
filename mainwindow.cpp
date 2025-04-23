@@ -4,7 +4,6 @@
 #include "qcustomplot.h"
 #include "ui_mainwindow.h"
 
-
 MainWindow::MainWindow(Manager *manager, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -12,7 +11,6 @@ MainWindow::MainWindow(Manager *manager, QWidget *parent)
     , timer(nullptr)
     , timeStep(0)
 {
-
     ui->setupUi(this);
 
     // Ustawianie zakresów
@@ -43,11 +41,19 @@ MainWindow::MainWindow(Manager *manager, QWidget *parent)
     initCharts();
 
 
-    connect(manager, &Manager::modeChanged, this, &MainWindow::onModeChanged);
+   // NetworkSettings *networkSettings = new NetworkSettings(manager, this);
+
+    networkSettings = new NetworkSettings(manager, this);
+
+    connect(networkSettings, &NetworkSettings::regulatorModeActivated, this, &MainWindow::configureRegulatorMode);
+    connect(networkSettings, &NetworkSettings::objectModeActivated, this, &MainWindow::configureObjectMode);
+    connect(networkSettings, &NetworkSettings::networkModeDisabled, this, &MainWindow::configureLocalMode);
+
+
+
 
 
 }
-
 
 MainWindow::~MainWindow()
 {
@@ -463,8 +469,6 @@ void MainWindow::on_war_stala_editingFinished()
 
 void MainWindow::on_pushButtonKonfiguracjaSieci_clicked()
 {
-
-
     if (!networkSettings) {
         //         // Tworzenie nowego okna konfiguracji sieci
         networkSettings = new NetworkSettings(manager, this); // Przekazanie głównego managera
@@ -475,26 +479,51 @@ void MainWindow::on_pushButtonKonfiguracjaSieci_clicked()
 
     // Przełącz na tryb sieciowy
     manager->switchMode(true); // Ustaw tryb online
-
-
 }
 
 
-void MainWindow::onModeChanged(bool isNetworkMode)
+
+void MainWindow::configureRegulatorMode()
 {
-    if (isNetworkMode) {
-        // Tryb sieciowy: Odblokuj sterowanie, zablokuj ARX
-        ui->Start_Button->setEnabled(true);
-        ui->Stop_Button->setEnabled(true);
-        ui->Reset_Button->setEnabled(true);
-        ui->Conf_Button->setEnabled(false); // Zablokuj możliwość edycji ARX
-    } else {
-        // Tryb stacjonarny: Odblokuj ARX
-        ui->Start_Button->setEnabled(true);
-        ui->Stop_Button->setEnabled(true);
-        ui->Reset_Button->setEnabled(true);
-        ui->Conf_Button->setEnabled(true); // Odblokuj możliwość edycji ARX
-    }
-    qDebug() << "Kontrolki zmodyfikowane w MainWindow!";
+    // Zablokuj kontrolkę ARX
+    ui->Conf_Button->setEnabled(false);
 
+    // Odblokuj kontrolki sterowania
+    ui->Start_Button->setEnabled(true);
+    ui->Stop_Button->setEnabled(true);
+    ui->Reset_Button->setEnabled(true);
+
+    // Przełączanie trybu zawsze dostępne
+   // ui->pushButtonKonfiguracjaSieci->setEnabled(true);
+
+    qDebug() << "Regulator: ARX zablokowany, sterowanie odblokowane.";
 }
+
+
+void MainWindow::configureObjectMode()
+{
+    ui->Start_Button->setEnabled(false);
+    ui->Stop_Button->setEnabled(false);
+    ui->Reset_Button->setEnabled(false);
+
+    // Odblokowanie ARX i przełączania trybu
+    ui->Conf_Button->setEnabled(true);  // ARX odblokowane
+    ui->pushButtonKonfiguracjaSieci->setEnabled(true); // Przełączanie trybu dostępne
+
+    qDebug() << "Tryb sieciowy obiektu: sterowanie zablokowane, ARX odblokowany.";
+}
+
+
+void MainWindow::configureLocalMode()
+{
+    // Odblokowanie wszystkich kontrolek w trybie lokalnym
+    ui->Conf_Button->setEnabled(true);    // Odblokowanie ARX
+    ui->Start_Button->setEnabled(true);  // Odblokowanie przycisku Start
+    ui->Stop_Button->setEnabled(true);   // Odblokowanie przycisku Stop
+    ui->Reset_Button->setEnabled(true);  // Odblokowanie przycisku Reset
+    ui->pushButtonKonfiguracjaSieci->setEnabled(true); // Odblokowanie konfiguracji sieci
+
+    qDebug() << "Tryb lokalny: wszystkie kontrolki odblokowane.";
+}
+
+

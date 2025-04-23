@@ -51,7 +51,8 @@ public:
         buttonBox->setObjectName("buttonBox");
         buttonBox->setGeometry(QRect(30, 240, 341, 32));
         buttonBox->setOrientation(Qt::Orientation::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok);
+        buttonBox->setStandardButtons(QDialogButtonBox::StandardButton::Cancel
+                                      | QDialogButtonBox::StandardButton::Ok);
         layoutWidget = new QWidget(NetworkSettings);
         layoutWidget->setObjectName("layoutWidget");
         layoutWidget->setGeometry(QRect(10, 20, 385, 191));
@@ -102,7 +103,6 @@ public:
 
         horizontalLayout->addWidget(stopServerButton);
 
-
         gridLayout->addLayout(horizontalLayout, 1, 0, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
@@ -117,34 +117,44 @@ public:
 
         horizontalLayout_2->addWidget(disconnectButton);
 
-
         gridLayout->addLayout(horizontalLayout_2, 2, 0, 1, 1);
 
-
         retranslateUi(NetworkSettings);
-        QObject::connect(buttonBox, &QDialogButtonBox::accepted, NetworkSettings, qOverload<>(&QDialog::accept));
-        QObject::connect(buttonBox, &QDialogButtonBox::rejected, NetworkSettings, qOverload<>(&QDialog::reject));
+        QObject::connect(buttonBox,
+                         &QDialogButtonBox::accepted,
+                         NetworkSettings,
+                         qOverload<>(&QDialog::accept));
+        QObject::connect(buttonBox,
+                         &QDialogButtonBox::rejected,
+                         NetworkSettings,
+                         qOverload<>(&QDialog::reject));
 
         QMetaObject::connectSlotsByName(NetworkSettings);
     } // setupUi
 
     void retranslateUi(QDialog *NetworkSettings)
     {
-        NetworkSettings->setWindowTitle(QCoreApplication::translate("NetworkSettings", "Dialog", nullptr));
-        portLabel->setText(QCoreApplication::translate("NetworkSettings", "number of port", nullptr));
+        NetworkSettings->setWindowTitle(
+            QCoreApplication::translate("NetworkSettings", "Dialog", nullptr));
+        portLabel->setText(
+            QCoreApplication::translate("NetworkSettings", "number of port", nullptr));
         statusLabel->setText(QString());
         statusLampka->setText(QCoreApplication::translate("NetworkSettings", "light", nullptr));
         ipLabel->setText(QCoreApplication::translate("NetworkSettings", "IP", nullptr));
-        startServerButton->setText(QCoreApplication::translate("NetworkSettings", "Start server", nullptr));
-        stopServerButton->setText(QCoreApplication::translate("NetworkSettings", "Stop server", nullptr));
-        connectButton->setText(QCoreApplication::translate("NetworkSettings", "Connect server", nullptr));
-        disconnectButton->setText(QCoreApplication::translate("NetworkSettings", "Disconnect server", nullptr));
+        startServerButton->setText(
+            QCoreApplication::translate("NetworkSettings", "Start server", nullptr));
+        stopServerButton->setText(
+            QCoreApplication::translate("NetworkSettings", "Stop server", nullptr));
+        connectButton->setText(
+            QCoreApplication::translate("NetworkSettings", "Connect server", nullptr));
+        disconnectButton->setText(
+            QCoreApplication::translate("NetworkSettings", "Disconnect server", nullptr));
     } // retranslateUi
-
 };
 
 namespace Ui {
-    class NetworkSettings: public Ui_NetworkSettings {};
+class NetworkSettings : public Ui_NetworkSettings
+{};
 } // namespace Ui
 
 QT_END_NAMESPACE

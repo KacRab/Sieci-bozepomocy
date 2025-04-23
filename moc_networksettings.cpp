@@ -6,13 +6,12 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "networksettings.h"
 #include <QtCore/qmetatype.h>
+#include "networksettings.h"
 
 #include <QtCore/qtmochelpers.h>
 
 #include <memory>
-
 
 #include <QtCore/qxptype_traits.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -31,66 +30,74 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
-struct qt_meta_tag_ZN15NetworkSettingsE_t {};
+struct qt_meta_tag_ZN15NetworkSettingsE_t
+{};
 } // unnamed namespace
 
-
 #ifdef QT_MOC_HAS_STRINGDATA
-static constexpr auto qt_meta_stringdata_ZN15NetworkSettingsE = QtMocHelpers::stringData(
-    "NetworkSettings",
-    "onModeChanged",
-    "",
-    "isRegulator"
-);
-#else  // !QT_MOC_HAS_STRINGDATA
+static constexpr auto qt_meta_stringdata_ZN15NetworkSettingsE
+    = QtMocHelpers::stringData("NetworkSettings", "onModeChanged", "", "isRegulator");
+#else // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
 #endif // !QT_MOC_HAS_STRINGDATA
 
 Q_CONSTINIT static const uint qt_meta_data_ZN15NetworkSettingsE[] = {
 
- // content:
-      12,       // revision
-       0,       // classname
-       0,    0, // classinfo
-       1,   14, // methods
-       0,    0, // properties
-       0,    0, // enums/sets
-       0,    0, // constructors
-       0,       // flags
-       0,       // signalCount
+    // content:
+    12, // revision
+    0,  // classname
+    0,
+    0, // classinfo
+    1,
+    14, // methods
+    0,
+    0, // properties
+    0,
+    0, // enums/sets
+    0,
+    0, // constructors
+    0, // flags
+    0, // signalCount
 
- // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   20,    2, 0x0a,    1 /* Public */,
+    // slots: name, argc, parameters, tag, flags, initial metatype offsets
+    1,
+    1,
+    20,
+    2,
+    0x0a,
+    1 /* Public */,
 
- // slots: parameters
-    QMetaType::Void, QMetaType::Bool,    3,
+    // slots: parameters
+    QMetaType::Void,
+    QMetaType::Bool,
+    3,
 
-       0        // eod
+    0 // eod
 };
 
-Q_CONSTINIT const QMetaObject NetworkSettings::staticMetaObject = { {
-    QMetaObject::SuperData::link<QDialog::staticMetaObject>(),
-    qt_meta_stringdata_ZN15NetworkSettingsE.offsetsAndSizes,
-    qt_meta_data_ZN15NetworkSettingsE,
-    qt_static_metacall,
-    nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_tag_ZN15NetworkSettingsE_t,
-        // Q_OBJECT / Q_GADGET
-        QtPrivate::TypeAndForceComplete<NetworkSettings, std::true_type>,
-        // method 'onModeChanged'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<bool, std::false_type>
-    >,
-    nullptr
-} };
+Q_CONSTINIT const QMetaObject NetworkSettings::staticMetaObject = {
+    {QMetaObject::SuperData::link<QDialog::staticMetaObject>(),
+     qt_meta_stringdata_ZN15NetworkSettingsE.offsetsAndSizes,
+     qt_meta_data_ZN15NetworkSettingsE,
+     qt_static_metacall,
+     nullptr,
+     qt_incomplete_metaTypeArray<qt_meta_tag_ZN15NetworkSettingsE_t,
+                                 // Q_OBJECT / Q_GADGET
+                                 QtPrivate::TypeAndForceComplete<NetworkSettings, std::true_type>,
+                                 // method 'onModeChanged'
+                                 QtPrivate::TypeAndForceComplete<void, std::false_type>,
+                                 QtPrivate::TypeAndForceComplete<bool, std::false_type>>,
+     nullptr}};
 
 void NetworkSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<NetworkSettings *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->onModeChanged((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
-        default: ;
+        case 0:
+            _t->onModeChanged((*reinterpret_cast<std::add_pointer_t<bool>>(_a[1])));
+            break;
+        default:;
         }
     }
 }
@@ -102,9 +109,10 @@ const QMetaObject *NetworkSettings::metaObject() const
 
 void *NetworkSettings::qt_metacast(const char *_clname)
 {
-    if (!_clname) return nullptr;
+    if (!_clname)
+        return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_ZN15NetworkSettingsE.stringdata0))
-        return static_cast<void*>(this);
+        return static_cast<void *>(this);
     return QDialog::qt_metacast(_clname);
 }
 
