@@ -488,27 +488,15 @@ void MainWindow::configureRegulatorMode()
     // Zablokuj kontrolkę ARX
     ui->Conf_Button->setEnabled(false);
 
-    // Odblokuj kontrolki sterowania
-    ui->Start_Button->setEnabled(true);
-    ui->Stop_Button->setEnabled(true);
-    ui->Reset_Button->setEnabled(true);
-
-    // Przełączanie trybu zawsze dostępne
-   // ui->pushButtonKonfiguracjaSieci->setEnabled(true);
-
-    qDebug() << "Regulator: ARX zablokowany, sterowanie odblokowane.";
+    qDebug() << "Tryb sieciowy regulatora: ARX zablokowany, sterowanie odblokowane.";
 }
 
 
 void MainWindow::configureObjectMode()
 {
-    ui->Start_Button->setEnabled(false);
-    ui->Stop_Button->setEnabled(false);
-    ui->Reset_Button->setEnabled(false);
-
-    // Odblokowanie ARX i przełączania trybu
-    ui->Conf_Button->setEnabled(true);  // ARX odblokowane
-    ui->pushButtonKonfiguracjaSieci->setEnabled(true); // Przełączanie trybu dostępne
+    ui->groupBox->setEnabled(false);        //Ustawienia regulatora PID
+    ui->groupBox_2->setEnabled(false);      //Ustawienia generatora
+    ui->groupBox_5->setEnabled(false);      //Pzyciski start stop reset
 
     qDebug() << "Tryb sieciowy obiektu: sterowanie zablokowane, ARX odblokowany.";
 }
@@ -516,12 +504,10 @@ void MainWindow::configureObjectMode()
 
 void MainWindow::configureLocalMode()
 {
-    // Odblokowanie wszystkich kontrolek w trybie lokalnym
+    ui->groupBox->setEnabled(true);        //Ustawienia regulatora PID
     ui->Conf_Button->setEnabled(true);    // Odblokowanie ARX
-    ui->Start_Button->setEnabled(true);  // Odblokowanie przycisku Start
-    ui->Stop_Button->setEnabled(true);   // Odblokowanie przycisku Stop
-    ui->Reset_Button->setEnabled(true);  // Odblokowanie przycisku Reset
-    ui->pushButtonKonfiguracjaSieci->setEnabled(true); // Odblokowanie konfiguracji sieci
+    ui->groupBox_2->setEnabled(true);      //Ustawienia generatora
+    ui->groupBox_5->setEnabled(true);      //Pzyciski start stop reset
 
     qDebug() << "Tryb lokalny: wszystkie kontrolki odblokowane.";
 }

@@ -118,7 +118,7 @@ public:
     void switchMode(bool isNetworkMode)
     {
         emit modeChanged(isNetworkMode); // Emituj wartość true (sieć) lub false (offline)
-        qDebug() << "Tryb pracy: " << (isNetworkMode ? "Regulator" : "Obiekt regulacji");
+        qDebug() << "Tryb pracy: " << (isNetworkMode ? "Obiekt regulacji" : "Regulator");
     }
 
 signals:
