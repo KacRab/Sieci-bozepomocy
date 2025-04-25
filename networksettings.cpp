@@ -30,7 +30,7 @@ NetworkSettings::NetworkSettings(Manager *manager, QWidget *parent)
         QString host = ui->ipLineEdit->text();
         double port = ui->portLineEdit->text().toDouble();
         manager->connectToServer(host, port);
-        manager->startTaktowanie(); // Rozpocznij wykonywanie taktu
+        //manager->startTaktowanie(); // Rozpocznij wykonywanie taktu
     });
 
     connect(manager, &Manager::statusChanged, ui->statusLabel, &QLabel::setText);
@@ -70,15 +70,13 @@ void NetworkSettings::updateLampka(const QString &status)
 
 void NetworkSettings::on_startServerButton_clicked()
 {
-    emit regulatorModeActivated(); // Emituj sygnał do MainWindow
-
+    emit objectModeActivated();
     qDebug() << "Sygnał startServerRequested został wyemitowany.";
 }
 
 void NetworkSettings::on_stopServerButton_clicked()
 {
     manager->stopServer();
-
     emit networkModeDisabled();
 
 }
@@ -86,13 +84,15 @@ void NetworkSettings::on_stopServerButton_clicked()
 
 void NetworkSettings::on_connectButton_clicked()
 {
-    emit objectModeActivated();
+    emit regulatorModeActivated(); // Emituj sygnał do MainWindow
+    manager->startTaktowanie();
 
 }
 
 void NetworkSettings::on_disconnectButton_clicked()
 {
     manager->disconnectClient();
+    manager->stopTaktowanie();
     emit networkModeDisabled(); // Wyemitowanie sygnału przejścia do trybu lokalnego
     qDebug() << "Połączenie sieciowe zatrzymane. Przełączono do trybu lokalnego obiektu.";
 }
