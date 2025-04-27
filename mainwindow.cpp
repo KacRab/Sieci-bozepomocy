@@ -478,7 +478,7 @@ void MainWindow::on_pushButtonKonfiguracjaSieci_clicked()
     networkSettings->activateWindow(); // Aktywacja okna
 
     // Przełącz na tryb sieciowy
-    manager->switchMode(true); // Ustaw tryb online
+    //manager->switchMode(true); // Ustaw tryb online
 }
 
 

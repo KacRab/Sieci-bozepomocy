@@ -47,6 +47,7 @@ public:
     {
         if (server) {
             server->close();
+            serverSocket = nullptr;
             delete server;
             server = nullptr;
             emit statusChanged("Serwer zatrzymany.");
@@ -118,7 +119,7 @@ public:
     void switchMode(bool isNetworkMode)
     {
         emit modeChanged(isNetworkMode); // Emituj wartość true (sieć) lub false (offline)
-        qDebug() << "Tryb pracy: " << (isNetworkMode ? "Obiekt regulacji" : "Regulator");
+        qDebug() << "Tryb pracy: " << (isNetworkMode ? "Online" : "Offline");
     }
 
 signals:
