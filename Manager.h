@@ -73,18 +73,70 @@ public:
         }
     }
 
-    // Uruchom serwer w trybie Regulatora
+    void sendParameters()
+    {
+        if (clientSocket && clientSocket->isOpen()) {
+            QString parametry = "PID=1.0,0.1,0.01;ARX=1.0,0.5,0.1";
+            clientSocket->write(parametry.toUtf8());
+            qDebug() << "Wysłano parametry: " << parametry;
+        }
+    }
+
+    void receiveParameters(const QString &parametry)
+    {
+        QStringList parts = parametry.split(";");
+        QStringList pidParams = parts[0].split(",");
+        QStringList arxParams = parts[1].split(",");
+
+        // Ustaw PID
+        std::vector<double> parametryPID = {pidParams[0].toDouble(),
+                                            pidParams[1].toDouble(),
+                                            pidParams[2].toDouble()};
+        sprzezeniezwrotne.setPID(parametryPID);
+
+        // Ustaw ARX
+        std::vector<double> A = {arxParams[0].toDouble()};
+        std::vector<double> B = {arxParams[1].toDouble()};
+        int delay = arxParams[2].toInt();
+        sprzezeniezwrotne.setARX(A, B, delay);
+        qDebug() << "Odebrano i ustawiono parametry: " << parametry;
+    }
+
     void startServer(int port)
     {
-        qInfo() << __FUNCTION__ << ", port: " << port;
         if (server)
-            return; // Unikaj wielokrotnego uruchamiania
+            return; // Unikaj wielokrotnego uruchamiania serwera
+
         server = new QTcpServer(this);
-        connect(server, &QTcpServer::newConnection, this, [=]() {
-            qInfo() << "New connection to server established";
+
+        // Obsługa połączeń od regulatora (klienta)
+        connect(server, &QTcpServer::newConnection, this, [this]() {
             serverSocket = server->nextPendingConnection();
-            connect(serverSocket, &QTcpSocket::readyRead, this, &Manager::receiveSignal);
-            emit statusChanged("Klient połączony!");
+
+          //  connect(serverSocket, &QTcpSocket::readyRead, this, &Manager::receiveSignal);
+           // qDebug() << "Połączono sygnał readyRead dla klienta.";
+
+
+
+            // Odbieranie sygnału sterującego od regulatora
+            connect(serverSocket, &QTcpSocket::readyRead, this, [this]() {
+                QByteArray data = serverSocket->readAll();
+                qDebug() << "Data: " << data.toStdString();
+                double sygnalSterujacy = QString(data).toDouble(); // Odebrany sygnał sterujący
+                wyniki[5] = sygnalSterujacy;
+                qDebug() << "Otrzymano sygnał sterujący: " << sygnalSterujacy;
+
+                // Oblicz wartość regulowaną (ARX)
+                double wartoscRegulowana = wyniki[6];//sprzezeniezwrotne.SimUAR(sygnalSterujacy)[6];
+
+                // Wyślij wartość regulowaną do regulatora
+                serverSocket->write(QString::number(wartoscRegulowana).toUtf8());
+                qDebug() << "Wysłano wartość regulowaną: " << wartoscRegulowana;
+                dataReceived = true;
+
+            });
+
+            emit statusChanged("Połączono z regulatorem (klientem)!");
         });
 
         if (!server->listen(QHostAddress::Any, port)) {
@@ -94,23 +146,46 @@ public:
         }
     }
 
-    // Połącz jako klient w trybie Obiektu regulacji
     void connectToServer(const QString &address, int port)
     {
         if (clientSocket)
-            return;
+            return; // Unikaj wielokrotnego tworzenia socketu
+
         clientSocket = new QTcpSocket(this);
 
-        connect(clientSocket, &QTcpSocket::readyRead, this, &Manager::receiveSignal);
-        qDebug() << "Połączono sygnał readyRead dla klienta.";
+       // connect(clientSocket, &QTcpSocket::readyRead, this, &Manager::receiveSignal);
+
+
+        // Połączenie z serwerem (obiekt regulacji)
+        connect(clientSocket, &QTcpSocket::readyRead, this, [this]() {
+            QByteArray data = clientSocket->readAll();
+            double wartoscRegulowana = QString(data).toDouble(); // Odebrana wartość regulowana
+            wyniki[6] = wartoscRegulowana;
+            sprzezeniezwrotne.setRegulowana(wyniki);
+            qDebug() << "Otrzymano wartość regulowaną: " << wartoscRegulowana;
+
+            // Oblicz sygnał sterujący (PID)
+            //double wartZadana = gen_wart.GenerujSygnal(timer->interval());
+            //std::vector<double> wynikiPID = sprzezeniezwrotne.SimUAR(wartZadana);
+            double sygnalSterujacy = wyniki[5];
+
+            // Wyślij sygnał sterujący do obiektu regulacji
+            clientSocket->write(QString::number(sygnalSterujacy).toUtf8());
+            qDebug() << "Wysłano sygnał sterujący: " << sygnalSterujacy;
+            dataReceived = true;
+
+        });
 
         connect(clientSocket, &QTcpSocket::connected, this, [=]() {
             emit statusChanged("Połączono z serwerem!");
         });
+
         connect(clientSocket, &QTcpSocket::disconnected, this, [=]() {
             emit statusChanged("Rozłączono z serwerem.");
         });
+
         clientSocket->connectToHost(address, port);
+
         if (!clientSocket->waitForConnected(3000)) {
             emit statusChanged("Nie udało się połączyć z serwerem!");
         }
@@ -174,7 +249,14 @@ public slots:
     std::vector<double> Symuluj(double czas)
     {
         double wartZadana = gen_wart.GenerujSygnal(czas);
-        return sprzezeniezwrotne.SimUAR(wartZadana);
+        if(clientSocket){
+            wyniki = sprzezeniezwrotne.SimPIDOnline(wartZadana);
+            return wyniki;
+        }else if(server){
+            wyniki[6]= sprzezeniezwrotne.zwrocY(wyniki)[6];
+            return wyniki;
+        }else{
+            return sprzezeniezwrotne.SimUAR(wartZadana);}
     }
 
     void zapisz(const std::vector<double> &ParametryPID,
@@ -286,6 +368,7 @@ private:
     GenWartZadana gen_wart;
     QTimer *timer;     // Timer do taktowania
     bool dataReceived; // Flaga czy dane dotarły od obiektu
+    std::vector <double> wyniki = {0.0,0.0,0.0,0.0,0.0,0.0};
 
     void processResponseData()
     {

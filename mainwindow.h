@@ -26,7 +26,6 @@ public:
     void configureObjectMode();
     void configureLocalMode();
 
-
 private slots:
     // Przyciski:
     void on_Start_Button_clicked();

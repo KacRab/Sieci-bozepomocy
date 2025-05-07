@@ -63,11 +63,6 @@ void NetworkSettings::updateLampka(const QString &status)
     });
 }
 
-
-
-
-
-
 void NetworkSettings::on_startServerButton_clicked()
 {
     emit objectModeActivated();
@@ -78,15 +73,12 @@ void NetworkSettings::on_stopServerButton_clicked()
 {
     manager->stopServer();
     emit networkModeDisabled();
-
 }
-
 
 void NetworkSettings::on_connectButton_clicked()
 {
     emit regulatorModeActivated(); // Emituj sygnał do MainWindow
     manager->startTaktowanie();
-
 }
 
 void NetworkSettings::on_disconnectButton_clicked()
@@ -96,5 +88,3 @@ void NetworkSettings::on_disconnectButton_clicked()
     emit networkModeDisabled(); // Wyemitowanie sygnału przejścia do trybu lokalnego
     qDebug() << "Połączenie sieciowe zatrzymane. Przełączono do trybu lokalnego obiektu.";
 }
-
-

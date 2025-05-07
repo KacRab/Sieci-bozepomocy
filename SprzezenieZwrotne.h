@@ -32,6 +32,28 @@ public:
                 wartRegulowana};
     }
 
+    std::vector<double> SimPIDOnline(double wartZadana){
+        double uchyb = wartZadana - wartRegulowana;
+        std::vector<double> sterowanie = pid.SumU(uchyb);
+
+        return {wartZadana,
+                uchyb,
+                sterowanie[0],
+                sterowanie[1],
+                sterowanie[2],
+                sterowanie[3]};
+    }
+
+    std::vector<double> zwrocY(std::vector <double> wyniki){
+        wartRegulowana = model.SimY(wyniki[5]);
+        wyniki[6] = wartRegulowana;
+        return wyniki;
+    }
+
+    void setRegulowana(std::vector <double> wyniki){
+        wartRegulowana = wyniki[6];
+    }
+
     void setPID(std::vector<double> &ParametryPID) { pid.setPID(ParametryPID); }
     void setTrybPID(const bool Tryb) { pid.setTryb(Tryb); }
     void ResetPID() { pid.ResetPID(); }

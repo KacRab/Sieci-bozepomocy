@@ -24,7 +24,6 @@ public:
 public slots:
     void onModeChanged(bool isRegulator);
 
-
 private slots:
     void on_stopServerButton_clicked();
 
@@ -36,17 +35,13 @@ private slots:
 
 signals:
     void regulatorModeActivated(); // Wywoływany po kliknięciu Start Server
-    void networkModeDisabled(); // Wywoływany po kliknięciu Stop
+    void networkModeDisabled();    // Wywoływany po kliknięciu Stop
     void objectModeActivated();
-
-
 
 private:
     Ui::NetworkSettings *ui;
     Manager *manager;
     MainWindow *mainWindow;
 };
-
-
 
 #endif // NETWORKSETTINGS_H

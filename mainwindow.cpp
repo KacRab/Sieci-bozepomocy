@@ -40,19 +40,22 @@ MainWindow::MainWindow(Manager *manager, QWidget *parent)
     // Inicjalizacja wykresów
     initCharts();
 
-
-   // NetworkSettings *networkSettings = new NetworkSettings(manager, this);
+    // NetworkSettings *networkSettings = new NetworkSettings(manager, this);
 
     networkSettings = new NetworkSettings(manager, this);
 
-    connect(networkSettings, &NetworkSettings::regulatorModeActivated, this, &MainWindow::configureRegulatorMode);
-    connect(networkSettings, &NetworkSettings::objectModeActivated, this, &MainWindow::configureObjectMode);
-    connect(networkSettings, &NetworkSettings::networkModeDisabled, this, &MainWindow::configureLocalMode);
-
-
-
-
-
+    connect(networkSettings,
+            &NetworkSettings::regulatorModeActivated,
+            this,
+            &MainWindow::configureRegulatorMode);
+    connect(networkSettings,
+            &NetworkSettings::objectModeActivated,
+            this,
+            &MainWindow::configureObjectMode);
+    connect(networkSettings,
+            &NetworkSettings::networkModeDisabled,
+            this,
+            &MainWindow::configureLocalMode);
 }
 
 MainWindow::~MainWindow()
@@ -470,46 +473,35 @@ void MainWindow::on_war_stala_editingFinished()
 void MainWindow::on_pushButtonKonfiguracjaSieci_clicked()
 {
     if (!networkSettings) {
-        //         // Tworzenie nowego okna konfiguracji sieci
         networkSettings = new NetworkSettings(manager, this); // Przekazanie głównego managera
     }
-    networkSettings->show();           // Pokazanie okna
-    networkSettings->raise();          // Przesunięcie na pierwszy plan
-    networkSettings->activateWindow(); // Aktywacja okna
-
-    // Przełącz na tryb sieciowy
-    //manager->switchMode(true); // Ustaw tryb online
+    networkSettings->show();
+    networkSettings->raise(); // Przesunięcie na pierwszy plan
+    networkSettings->activateWindow();
 }
-
-
 
 void MainWindow::configureRegulatorMode()
 {
-    // Zablokuj kontrolkę ARX
     ui->Conf_Button->setEnabled(false);
 
     qDebug() << "Tryb sieciowy regulatora: ARX zablokowany, sterowanie odblokowane.";
 }
 
-
 void MainWindow::configureObjectMode()
 {
-    ui->groupBox->setEnabled(false);        //Ustawienia regulatora PID
-    ui->groupBox_2->setEnabled(false);      //Ustawienia generatora
-    ui->groupBox_5->setEnabled(false);      //Pzyciski start stop reset
+    ui->groupBox->setEnabled(false);   //Ustawienia regulatora PID
+    ui->groupBox_2->setEnabled(false); //Ustawienia generatora
+    ui->groupBox_5->setEnabled(false); //Pzyciski start stop reset
 
     qDebug() << "Tryb sieciowy obiektu: sterowanie zablokowane, ARX odblokowany.";
 }
 
-
 void MainWindow::configureLocalMode()
 {
-    ui->groupBox->setEnabled(true);        //Ustawienia regulatora PID
-    ui->Conf_Button->setEnabled(true);    // Odblokowanie ARX
-    ui->groupBox_2->setEnabled(true);      //Ustawienia generatora
-    ui->groupBox_5->setEnabled(true);      //Pzyciski start stop reset
+    ui->groupBox->setEnabled(true);    //Ustawienia regulatora PID
+    ui->Conf_Button->setEnabled(true); // Odblokowanie ARX
+    ui->groupBox_2->setEnabled(true);  //Ustawienia generatora
+    ui->groupBox_5->setEnabled(true);  //Pzyciski start stop reset
 
     qDebug() << "Tryb lokalny: wszystkie kontrolki odblokowane.";
 }
-
-
